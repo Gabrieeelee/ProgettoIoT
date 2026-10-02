@@ -16,40 +16,35 @@ class DRSimulatorApp:
         self.create_widgets()
 
     def create_widgets(self):
-        # Frame per i Controlli di Input
+        
         control_frame = ttk.LabelFrame(self.root, text="Parametri di Configurazione")
         control_frame.pack(fill=tk.X, padx=10, pady=10)
 
-        # Pulsante Caricamento Dati
         self.btn_load = ttk.Button(control_frame, text="Carica CSV Dati LMP", command=self.load_data)
         self.btn_load.grid(row=0, column=0, padx=10, pady=10)
         
         self.lbl_data_status = ttk.Label(control_frame, text="Nessun file caricato", foreground="red")
         self.lbl_data_status.grid(row=0, column=1, padx=10, pady=10)
 
-        # Parametro: Prezzo Bitcoin
         ttk.Label(control_frame, text="Prezzo BTC ($):").grid(row=1, column=0, sticky=tk.E, padx=5, pady=5)
         self.ent_btc_price = ttk.Entry(control_frame)
-        self.ent_btc_price.insert(0, "25000") # Valore dell'articolo
+        self.ent_btc_price.insert(0, "25000") 
         self.ent_btc_price.grid(row=1, column=1, padx=5, pady=5)
 
-        # Parametro: MWh per Bitcoin
         ttk.Label(control_frame, text="Difficoltà (MWh/BTC):").grid(row=1, column=2, sticky=tk.E, padx=5, pady=5)
         self.ent_mwh_per_btc = ttk.Entry(control_frame)
-        self.ent_mwh_per_btc.insert(0, "143") # Valore dell'articolo
+        self.ent_mwh_per_btc.insert(0, "143") 
         self.ent_mwh_per_btc.grid(row=1, column=3, padx=5, pady=5)
 
-        # Parametro: Costo Elettricità
         ttk.Label(control_frame, text="Costo Elettricità ($/MWh):").grid(row=2, column=0, sticky=tk.E, padx=5, pady=5)
         self.ent_elec_cost = ttk.Entry(control_frame)
         self.ent_elec_cost.insert(0, "30")
         self.ent_elec_cost.grid(row=2, column=1, padx=5, pady=5)
 
-        # Pulsante Avvio Simulazione
+
         self.btn_run = ttk.Button(control_frame, text="Avvia Simulazione", command=self.run_simulation, state=tk.DISABLED)
         self.btn_run.grid(row=2, column=3, padx=10, pady=10)
 
-        # Frame per il Grafico (Matplotlib)
         self.plot_frame = ttk.Frame(self.root)
         self.plot_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
         
@@ -90,7 +85,7 @@ class DRSimulatorApp:
         mean_lmp = np.mean(self.lmp_data)
         annual_dr_reward = mean_lmp * len(self.lmp_data)
 
-        thresholds = np.arange(35, 71, 1) # Range LMP da 35 a 70 $/MWh come in Figura 8
+        thresholds = np.arange(35, 71, 1) # Range LMP da 35 a 70 $/MWh
         profits = []
 
         # 2. Implementazione Eq. (1a) dell'articolo
